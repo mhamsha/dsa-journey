@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 public class Recursion {
 
     static class SquareRoot {
@@ -52,15 +54,39 @@ public class Recursion {
     }
 
     static class Factorial {
-        static void fact(){
-            System.out.println("hello checking");
+        static BigInteger fact(int n) {
+            if (n < 0) {
+                throw new IllegalArgumentException("Factorial is not defined for Negative Number!");
+
+            }
+            // base cases
+            if (n == 0) {
+                return BigInteger.ONE;
+            }
+
+            // induction case
+            return BigInteger.valueOf(n).multiply(fact(n - 1));
+
+        }
+    }
+
+    static class Fibonacci {
+        static int fibo(int n) {
+            if (n == 1) {
+                return 1;
+            }
+            if (n == 0) {
+                return 0;
+            }
+            return fibo(n - 1) + fibo(n - 2); 
         }
     }
 
     public static void main(String[] args) {
-        float ans = (float) SquareRoot.sqrt(2400);
-        System.out.println(ans);
-        System.out.println(Math.sqrt(2400));
-        Factorial.fact();
+        // System.out.println( (float) SquareRoot.sqrt(2400););
+
+        // System.out.println(Factorial.fact(50));
+
+        // System.out.println(Fibonacci.fibo(30));
     }
 }
