@@ -52,7 +52,7 @@ public class Recursion {
             // }
         }
     }
-
+   // functional approach
     static class Factorial {
         static BigInteger fact(int n) {
             if (n < 0) {
@@ -69,6 +69,27 @@ public class Recursion {
 
         }
     }
+    // OOP approach
+    // class Factorial {
+    //     private int n;
+
+    //     public Factorial(int n) {
+    //         if (n < 0) {
+    //             throw new IllegalArgumentException("Factorial is not defined for Negative Number!");
+    //         }
+    //         this.n = n;
+    //     }
+
+    //     public BigInteger compute() {
+    //         // base cases
+    //         if (n == 0) {
+    //             return BigInteger.ONE;
+    //         }
+
+    //         // induction case
+    //         return BigInteger.valueOf(n).multiply(new Factorial(n - 1).compute());
+    //     }
+    // }
 
     static class Fibonacci {
         static int fibo(int n) {
@@ -78,7 +99,60 @@ public class Recursion {
             if (n == 0) {
                 return 0;
             }
-            return fibo(n - 1) + fibo(n - 2); 
+            // Recursive case: sum of the two preceding numbers
+            return fibo(n - 1) + fibo(n - 2);
+        }
+    }
+
+    static class TowerOfHanoi {
+        static void hanoi(int lvl) {
+            // Start moving the tower from rod A to rod C using rod B as auxiliary
+            moveTower(lvl, 'A', 'C', 'B');
+        }
+
+        private static void moveTower(int lvl, char fr, char to, char ax) {
+            // Base case: only one disk to move
+            if (lvl == 1) {
+                printMove(lvl, fr, to);
+                return;
+            }
+            // Move the top lvl-1 disks from source to auxiliary
+            moveTower(lvl - 1, fr, ax, to);
+            // Move the remaining disk from source to destination
+            printMove(lvl, fr, to);
+            // Move the lvl-1 disks from auxiliary to destination
+            moveTower(lvl - 1, ax, to, fr);
+        }
+
+        private static void printMove(int lvl, char fr, char to) {
+            // Print the move of a disk from one rod to another
+            // Print the move of a disk from one rod to another
+            System.out.println("Move: " + lvl + " from " + fr + " to " + to);
+        }
+    }
+
+    static class SumOverList {
+        // Iterative function to sum elements of a list
+        static int itSum(int[] list) {
+            int sum = 0;
+            for (int i = 0; i < list.length; i++) {
+                sum += list[i];
+            }
+            return sum;
+        }
+
+        // Recursive function to sum elements of a list
+        static int reSum(int[] list) {
+            return reSumHelper(list, 0);
+        }
+
+        // Helper function for recursive sum
+        static int reSumHelper(int[] list, int index) {
+            // Base case: if index reaches the end of the list, return 0
+            if (index == list.length)
+                return 0;
+            // Recursive case: sum current element and recurse for the rest
+            return list[index] + reSumHelper(list, index + 1);
         }
     }
 
@@ -88,5 +162,13 @@ public class Recursion {
         // System.out.println(Factorial.fact(50));
 
         // System.out.println(Fibonacci.fibo(30));
+
+        // TowerOfHanoi.hanoi(3);
+
+        int[] list = { 1, 2, 3, 4, 5 };
+        // System.out.println(sumOverList.itSum(list));
+
+        // System.out.println(SumOverList.reSum(list));
+
     }
 }
