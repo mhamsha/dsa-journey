@@ -36,30 +36,31 @@ public class Tree {
         // pre-order dfs algorithm
         void post_dfs() {
             if (this.left != null)
-                this.left.in_dfs();
+                this.left.post_dfs();
             if (this.right != null)
-                this.right.in_dfs();
+                this.right.post_dfs();
             System.out.println(this.val);
         }
 
-        // breadth first search algorithm
+        // Breadth-first search algorithm
         void bfs() {
-            // ! need explanation of <>
-            // ? what it is, why it is, is there any alternative, why it's introduced, how
-            // we make the class to accept this?
-            ArrayList<TreeNode> to_visit = new ArrayList<>(Arrays.asList(this));
+            // Initialize a list with the root node to keep track of nodes to visit
+            ArrayList<TreeNode> to_visit = new ArrayList<>();
+            to_visit.add(this);
+            // Continue looping while there are nodes to visit
             while (to_visit.size() != 0) {
+                // Remove the first node from the list
                 TreeNode current = to_visit.remove(0);
-
+                // Process the current node (in this case, print its value)
                 System.out.println(current.val);
-
+                // Add the left child to the list if it exists
                 if (current.left != null) {
                     to_visit.add(current.left);
                 }
+                // Add the right child to the list if it exists
                 if (current.right != null) {
                     to_visit.add(current.right);
                 }
-
             }
         }
 
@@ -148,7 +149,7 @@ public class Tree {
         // t1.post_dfs();
         // System.out.println();
         // System.out.println();
-        // t1.bfs();
+        t1.bfs();
 
         PerformSum p = new PerformSum();
         // t1.dfs_apply(p::process);
